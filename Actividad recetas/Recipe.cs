@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,32 +24,49 @@ namespace Actividad_recetas
         }
         public static void AddRecipes (List<Recipe> recipesList)
         {
-            Console.WriteLine("Ingresa el número de receta.");
-            int id= Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Ingresa el nombre de la receta.");
-            string name = Console.ReadLine();
-            Console.WriteLine("Ingresa los ingredientes.");
-            string ingredients = Console.ReadLine();
-            Console.WriteLine("Ingresa la descripción o pasos de la receta.");
-            string description = Console.ReadLine();
-            Recipe recipe= new Recipe(id, name, ingredients, description);
-            recipesList.Add(recipe);
-            Console.WriteLine("La receta se ha registrado.");
+            int id = 0;
+            bool trycatch = true;
+            while (trycatch)
+            {
+                try
+                {
+                    if (id == 0)
+                    {
+                        Console.WriteLine("Ingresa el número de receta.");
+                        id = Convert.ToInt32(Console.ReadLine());
+                    }
+                    Console.WriteLine("Ingresa el nombre de la receta.");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Ingresa los ingredientes.");
+                    string ingredients = Console.ReadLine();
+                    Console.WriteLine("Ingresa la descripción o pasos de la receta.");
+                    string description = Console.ReadLine();
+                    Recipe recipe = new Recipe(id, name, ingredients, description);
+                    recipesList.Add(recipe);
+                    Console.WriteLine("La receta se ha registrado.");
+                    trycatch = false;
+                }
+                catch (Exception ex) { Console.Clear(); Console.WriteLine(ex.Message); }
+            }
         }
         public static void SearchRecipe(List<Recipe> recipesList)
         {
             Console.WriteLine("Ingresa el número de la receta que deseas buscar.");
-            int searchID = Convert.ToInt32(Console.ReadLine());
-            Recipe search= recipesList.Find(p=>p.Id==searchID);
-            if (search != null)
+            try
             {
-                Console.WriteLine($"Se ha encontrado la receta.");
-                Console.WriteLine($"Número: {search.Id} Nombre:{search.Name} Ingredientes: {search.Ingredients} Descripción:{search.Description}.");
+                int searchID = Convert.ToInt32(Console.ReadLine());
+                Recipe search = recipesList.Find(p => p.Id == searchID);
+                if (search != null)
+                {
+                    Console.WriteLine($"Se ha encontrado la receta.");
+                    Console.WriteLine($"Número: {search.Id} Nombre:{search.Name} Ingredientes: {search.Ingredients} Descripción:{search.Description}.");
+                }
+                else
+                {
+                    Console.WriteLine("No se ha encontrado la receta.");
+                }
             }
-            else
-            {
-                Console.WriteLine("No se ha encontrado la receta.");
-            }
+            catch (Exception ex) {Console.WriteLine(ex.Message); }
         }
         public static void ShowRecipes(List<Recipe> recipesList)
         {
