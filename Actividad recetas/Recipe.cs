@@ -50,5 +50,12 @@ namespace Actividad_recetas
                 Console.WriteLine("No se ha encontrado la receta.");
             }
         }
+        public static void ShowRecipes(List<Recipe> recipesList)
+        {
+            foreach (Recipe recipe in recipesList)
+            {
+                Console.WriteLine($"Número: {recipe.Id} Nombre: {recipe.Name}. Ingredientes: {recipe.Ingredients}. Descripción: {recipe.Description}.");
+            }
+        }
     }
 }
