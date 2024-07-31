@@ -35,5 +35,20 @@ namespace Actividad_recetas
             recipesList.Add(recipe);
             Console.WriteLine("La receta se ha registrado.");
         }
+        public static void SearchRecipe(List<Recipe> recipesList)
+        {
+            Console.WriteLine("Ingresa el número de la receta que deseas buscar.");
+            int searchID = Convert.ToInt32(Console.ReadLine());
+            Recipe search= recipesList.Find(p=>p.Id==searchID);
+            if (search != null)
+            {
+                Console.WriteLine($"Se ha encontrado la receta.");
+                Console.WriteLine($"Número: {search.Id} Nombre:{search.Name} Ingredientes: {search.Ingredients} Descripción:{search.Description}.");
+            }
+            else
+            {
+                Console.WriteLine("No se ha encontrado la receta.");
+            }
+        }
     }
 }

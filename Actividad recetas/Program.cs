@@ -21,6 +21,13 @@
                             Console.ReadKey();
                             break;
                         }
+                    case 2:
+                        {
+                            Console.Clear();
+                            Recipe.SearchRecipe(recipesList);
+                            Console.ReadKey();
+                            break;
+                        }
                 }
                 
             }
@@ -28,6 +35,7 @@
         public static void ShowMenu()
         {
             Console.WriteLine("1. Agregar receta.");
+            Console.WriteLine("2. Buscar receta.");
         }
     }
 }
